@@ -3,7 +3,7 @@
 ### Instruction for launching
 1.  Firstly - clone this repository to your local system with command in the terminal:
 
-        git clone git@github.com:BileyHarryCopter/MIPT_CONTESTS.git/HWH_tasks
+        git clone git@github.com:BileyHarryCopter/Hashmap.git
 
 2.  Secondly - enter to directory **Hashmap** with this repository and launch **hashmap** though the terminal with following command:
 
