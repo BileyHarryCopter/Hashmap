@@ -13,7 +13,7 @@
 
         ./start
 
-3.  You also can launch the program with your test-text. Change text in the file **Data.txt** on your by following pattern:
+3.  You also can launch the program with your test-text. Change text in the file **Data.txt** on your own by following pattern:
 
         Number of words will be found
         Number of symbols in the main string
