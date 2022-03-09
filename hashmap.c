@@ -105,9 +105,11 @@ int Contest_Task (hashmap hshmp, const char* name)
     {
         symb = fgetc (file);
         str = strctor (symb, file);
-        printf ("%s : %u\n", str, Hash_Find (hshmp, str));
+        //printf ("%s : %u\n", str, Hash_Find (hshmp, str));
+        printf ("%u ", Hash_Find (hshmp, str));
         position += strlen (str);
     }
+    printf ("\n");
 
     fclose (file);
     return NO_ERROR;
