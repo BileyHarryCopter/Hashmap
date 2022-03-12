@@ -17,38 +17,64 @@ int Hash_Ctor (hashmap *hshmp, unsigned size_init, unsigned (*Hash_Calc)(data_t 
     return NO_ERROR;
 }
 
-int Hash_Fill (hashmap *hshmp, const char *fname)
+int Hash_Fill (int mode, ...)
 {
+    va_list args;
+
     char symb;
     char *str;
-    FILE *file;
-    unsigned   find_nmb;
+    char *fname;
+    hashmap *hshmp;
+    unsigned  find_numb;
     unsigned  size_buff;
     unsigned  stri_numb;
     unsigned   position;
 
-    file = fopen (fname, "r");
-    if (!file)
-        return FILE_ERROR;
+    va_start (args, mode);
+    hshmp = va_arg (args, hashmap*);
+    assert (hshmp);
 
-    fseek (file, 0L, SEEK_SET);
-    assert (fscanf (file ,"%u %u", &find_nmb, &size_buff) == 2);
-
-    while (fgetc (file) != '\n') {;}
-
-    for (position = 0; position < size_buff; position++)
+    if (mode == FSTDIO)
     {
-        symb = fgetc (file);
-        if (isalpha (symb) != 0)
+        scanf ("%u %u", &find_numb, &size_buff);
+        while (getchar () != '\n') {;}
+        for (position = 0; position < size_buff; position++)
         {
-            str = strctor (symb, file);
-            position += strlen (str);
-            Hash_Insrt (hshmp, str);
+            symb = getchar ();
+            if (isalpha (symb))
+            {
+                str = strctor (symb);
+                position += strlen (str);
+                Hash_Insrt (hshmp, str);
+            }
         }
     }
+    else if (mode == FFILE)
+    {
+        fname = va_arg (args, char*);
+        FILE *file = fopen (fname, "r");
+        if (!file)
+            return INPUT_ERROR;
+        fseek (file, 0L, SEEK_SET);
+        assert (fscanf (file ,"%u %u", &find_numb, &size_buff) == 2);
+        while (fgetc (file) != '\n') {;}
+        for (position = 0; position < size_buff; position++)
+        {
+            symb = fgetc (file);
+            if (isalpha (symb) != 0)
+            {
+                str = fstrctor (symb, file);
+                position += strlen (str);
+                Hash_Insrt (hshmp, str);
+            }
+        }
+        fclose (file);
+    }
+    else
+        return INPUT_ERROR;
 
-    fclose (file);
-    return 0;
+    va_end (args);
+    return NO_ERROR;
 }
 
 unsigned Hash_Find (hashmap hshmp, data_t data)
@@ -77,41 +103,27 @@ unsigned Hash_Find (hashmap hshmp, data_t data)
     return conv;
 }
 
-// sorry for copypast, but this is need for only contest
-int Contest_Task (hashmap hshmp, const char* name)
+int Contest_Task (hashmap hshmp)
 {
     char symb;
     char *str;
-    FILE *file;
-    unsigned   str_buff, size_buff = 0;
     unsigned   position;
+    unsigned   size_buff = 0;
 
-    file = fopen (name, "r");
-    if (!file)
-        return FILE_ERROR;
-
-    fseek (file, 0L, SEEK_SET);
-    assert (fscanf (file ,"%u %u", &str_buff, &size_buff) == 2);
-
-    while (fgetc (file) != '\n') {;}
+    scanf ("%u", &size_buff);
+    while (getchar () != '\n') {;}
 
     for (position = 0; position < size_buff; position++)
-        symb = fgetc (file);
-
-    fscanf (file, "%u", &str_buff);
-    while (fgetc (file) != '\n') {;}
-
-    for (position = 0; position < str_buff; position++)
     {
-        symb = fgetc (file);
-        str = strctor (symb, file);
-        //printf ("%s : %u\n", str, Hash_Find (hshmp, str));
-        printf ("%u ", Hash_Find (hshmp, str));
-        position += strlen (str);
+        symb = getchar ();
+        if (isalpha (symb))
+        {
+            str = strctor (symb);
+            printf ("%u ", Hash_Find (hshmp, str));
+            position += strlen (str);
+        }
     }
     printf ("\n");
-
-    fclose (file);
     return NO_ERROR;
 }
 
@@ -235,7 +247,7 @@ void Hash_Dump (hashmap hshmp)
 }
 //===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*//
 //===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*//
-char *strctor (char first, FILE * file)
+char *fstrctor (char first, FILE * file)
 {
     unsigned length = 0;
     char *str = (char *) calloc (STRLEN, sizeof (char));
@@ -244,6 +256,20 @@ char *strctor (char first, FILE * file)
     {
         length++;
         *(str + length) = fgetc (file);
+    }
+    *(str + length) = '\0';
+    return str;
+}
+
+char *strctor (char first)
+{
+    unsigned length = 0;
+    char *str = (char *) calloc (STRLEN, sizeof (char));
+    *(str + length) = first;
+    while (isalpha (*(str + length)) != 0)
+    {
+        length++;
+        *(str + length) = getchar ();
     }
     *(str + length) = '\0';
     return str;
