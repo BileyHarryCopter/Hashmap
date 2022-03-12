@@ -1,3 +1,6 @@
+#ifndef HASH
+#define HASH
+
 #include <stdio.h>
 #include <ctype.h>
 #include <stdarg.h>
@@ -19,25 +22,9 @@ enum
 };
 
 typedef const char* data_t;
-
-typedef struct node_t
-{
-    struct node_t *next;
-    data_t        data;
-} node_t;
-
-typedef struct bucket
-{
-    node_t        *top;
-} bucket;
-
-typedef struct hashmap
-{
-    bucket        *array;
-    unsigned      capacity;
-    unsigned      insertion;
-    unsigned      (*hash_calc) (data_t data);
-} hashmap;
+struct node_t;
+struct bucket;
+typedef struct hashmap hashmap;
 
 //===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*//
 //===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*//
@@ -52,7 +39,7 @@ int Hash_Insrt (hashmap *hshmp, data_t insrt_data);
 
 
 // int Contest_Task (hashmap hshmp, const char* name);
-int Contest_Task (hashmap hshmp);
+int Contest_Task (hashmap *hshmp);
 
 
 void Hash_Dump (hashmap hshmp);
@@ -61,3 +48,5 @@ unsigned Hash_Calc (data_t data);
 char *strctor  (char first);
 char *fstrctor (char first, FILE * file);
 int istrcmp (const char * str1, const char * str2);
+
+#endif
