@@ -21,7 +21,7 @@ enum
     STRLEN      = 50
 };
 
-typedef const char* data_t;
+typedef char* data_t;
 struct node_t;
 struct bucket;
 typedef struct hashmap hashmap;

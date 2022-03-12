@@ -5,7 +5,7 @@
 typedef struct node_t
 {
     struct node_t *next;
-    data_t        data;
+    data_t         data;
 } node_t;
 
 typedef struct bucket
@@ -171,12 +171,6 @@ int Hash_Insrt (hashmap *hshmp, data_t insrt_data)
 
     assert (hshmp->array[hash_key].top);
 
-    /*
-    if (hshmp->array[hash_key].top == NULL)
-    {
-        hshmp->array[hash_key].top->next = (node_t *) calloc (1, sizeof (node_t));
-    }
-    */
     list->next = hshmp->array[hash_key].top->next;
     list->data = insrt_data;
     hshmp->array[hash_key].top->next = list;
@@ -232,14 +226,20 @@ int Hash_Dtor (hashmap *hshmp)
     {
         first = hshmp->array[i].top;
         assert (first);
+        if (first->next == NULL)
+        {
+            free (first);
+            continue;
+        }
         while (first->next != NULL)
         {
             second = first;
             first  = first->next;
+            free (second->data);
             free (second);
         }
+        free (first);
     }
-
     free (hshmp->array);
     free (hshmp);
 
