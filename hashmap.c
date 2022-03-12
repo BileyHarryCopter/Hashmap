@@ -188,9 +188,7 @@ int Hash_Resz (hashmap *hshmp)
 {
     unsigned i = 0;
     node_t *first, *second;
-    hashmap *new_hshmp = (hashmap *) calloc (1, sizeof (hashmap));
-
-    new_hshmp = Hash_Ctor (ENCR_KOEF * hshmp->capacity, hshmp->hash_calc);
+    hashmap *new_hshmp = Hash_Ctor (ENCR_KOEF * hshmp->capacity, hshmp->hash_calc);
 
     for (i = 0; i < hshmp->capacity; i++)
     {
@@ -242,6 +240,7 @@ int Hash_Dtor (hashmap *hshmp)
     }
 
     free (hshmp->array);
+    free (hshmp);
 
     return NO_ERROR;
 }
