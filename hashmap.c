@@ -8,33 +8,31 @@ typedef struct node_t
     data_t         data;
 } node_t;
 
-typedef struct bucket
-{
-    node_t        *top;
-} bucket;
-
 struct hashmap
 {
-    bucket        *array;
+    node_t         **array;
     unsigned      capacity;
     unsigned      insertion;
     unsigned      (*hash_calc) (data_t data);
 };
 //===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*//
 //===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*//
-hashmap *Hash_Ctor (unsigned size_init, unsigned (*Hash_Calc)(data_t data))
+hashmap *Hash_Ctor (const unsigned size_init, unsigned (*Hash_Calc)(data_t data))
 {
     int i = 0;
     hashmap *hshmp = (hashmap *)calloc (1, sizeof (hashmap));
 
     hshmp->capacity    = size_init;
     hshmp->insertion   = 0;
-    hshmp->array       = (bucket*) calloc (size_init, sizeof (bucket));
+    hshmp->array       = (node_t **) calloc (size_init, sizeof (node_t *));
     for (i = 0; i < size_init; i++)
     {
-        hshmp->array[i].top = (node_t *) calloc (1, sizeof (node_t));
+        hshmp->array[i] = (node_t *) calloc (1, sizeof (node_t));
+        #if 0
+        hshmp->array[i]->data = (data_t) calloc (STRLEN, sizeof (char));
+        #endif
     }
-    (hshmp->hash_calc) = Hash_Calc;
+    hshmp->hash_calc = Hash_Calc;
 
     return hshmp;
 }
@@ -104,7 +102,7 @@ unsigned Hash_Find (hashmap hshmp, data_t data)
     assert (&hshmp);
     unsigned key = (*hshmp.hash_calc)(data) % (hshmp.capacity);
     unsigned conv, pos = 0;
-    node_t *list = hshmp.array[key].top;
+    node_t *list = hshmp.array[key];
 
     if (!(list->next))
         return 0;
@@ -169,11 +167,11 @@ int Hash_Insrt (hashmap *hshmp, data_t insrt_data)
         Hash_Resz (hshmp);
     hash_key = (*hshmp->hash_calc)(insrt_data) % (hshmp->capacity);
 
-    assert (hshmp->array[hash_key].top);
+    assert (hshmp->array[hash_key]);
 
-    list->next = hshmp->array[hash_key].top->next;
+    list->next = hshmp->array[hash_key]->next;
     list->data = insrt_data;
-    hshmp->array[hash_key].top->next = list;
+    hshmp->array[hash_key]->next = list;
 
     hshmp->insertion += 1;
     return NO_ERROR;
@@ -187,14 +185,14 @@ int Hash_Resz (hashmap *hshmp)
 
     for (i = 0; i < hshmp->capacity; i++)
     {
-        first = hshmp->array[i].top;
+        first = hshmp->array[i];
         if (first->next == NULL)
         {
             free (first);
             continue;
         }
         first = first->next;
-        free (hshmp->array[i].top);
+        free (hshmp->array[i]);
         while (first->next != NULL)
         {
             Hash_Insrt (new_hshmp, first->data);
@@ -225,13 +223,7 @@ int Hash_Dtor (hashmap *hshmp)
 
     for (i = 0; i < hshmp->capacity; i++)
     {
-        first = hshmp->array[i].top;
-        assert (first);
-        if (first->next == NULL)
-        {
-            free (first);
-            continue;
-        }
+        first = hshmp->array[i];
         while (first->next != NULL)
         {
             second = first;
@@ -239,6 +231,9 @@ int Hash_Dtor (hashmap *hshmp)
             free (second->data);
             free (second);
         }
+
+        if (first->data != NULL)
+            free (first->data);
         free (first);
     }
     free (hshmp->array);
@@ -258,7 +253,7 @@ void Hash_Dump (hashmap *hshmp)
     for (i = 0; i < hshmp->capacity; i++)
     {
         printf ("bucket[%d]:\n\t", i);
-        list = hshmp->array[i].top;
+        list = hshmp->array[i];
         while (list)
         {
             printf ("%s -> ", list->data);

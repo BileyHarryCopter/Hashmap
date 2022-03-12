@@ -23,12 +23,11 @@ enum
 
 typedef char* data_t;
 struct node_t;
-struct bucket;
 typedef struct hashmap hashmap;
 
 //===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*//
 //===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*//
-hashmap *Hash_Ctor (unsigned size_init, unsigned (*Hash_Calc)(data_t data));
+hashmap *Hash_Ctor (const unsigned size_init, unsigned (*Hash_Calc)(data_t data));
 int Hash_Resz (hashmap *hshmp);
 int Hash_Dtor (hashmap *hshmp);
 unsigned Hash_Find (hashmap hshmp, data_t data);
