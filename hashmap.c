@@ -22,10 +22,10 @@ struct hashmap
 };
 //===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*//
 //===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*//
-int Hash_Ctor (hashmap *hshmp, unsigned size_init, unsigned (*Hash_Calc)(data_t data))
+hashmap *Hash_Ctor (unsigned size_init, unsigned (*Hash_Calc)(data_t data))
 {
     int i = 0;
-    assert (hshmp != NULL);
+    hashmap *hshmp = (hashmap *)calloc (1, sizeof (hashmap));
 
     hshmp->capacity    = size_init;
     hshmp->insertion   = 0;
@@ -36,7 +36,7 @@ int Hash_Ctor (hashmap *hshmp, unsigned size_init, unsigned (*Hash_Calc)(data_t 
     }
     (hshmp->hash_calc) = Hash_Calc;
 
-    return NO_ERROR;
+    return hshmp;
 }
 
 int Hash_Fill (int mode, ...)
@@ -190,7 +190,7 @@ int Hash_Resz (hashmap *hshmp)
     node_t *first, *second;
     hashmap *new_hshmp = (hashmap *) calloc (1, sizeof (hashmap));
 
-    Hash_Ctor (new_hshmp, ENCR_KOEF * hshmp->capacity, hshmp->hash_calc);
+    new_hshmp = Hash_Ctor (ENCR_KOEF * hshmp->capacity, hshmp->hash_calc);
 
     for (i = 0; i < hshmp->capacity; i++)
     {

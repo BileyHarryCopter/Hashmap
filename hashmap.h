@@ -28,7 +28,7 @@ typedef struct hashmap hashmap;
 
 //===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*//
 //===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*//
-int Hash_Ctor (hashmap *hshmp, unsigned size_init, unsigned (*Hash_Calc)(data_t data));
+hashmap *Hash_Ctor (unsigned size_init, unsigned (*Hash_Calc)(data_t data));
 int Hash_Resz (hashmap *hshmp);
 int Hash_Dtor (hashmap *hshmp);
 unsigned Hash_Find (hashmap hshmp, data_t data);

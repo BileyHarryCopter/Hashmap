@@ -4,7 +4,7 @@ int main (void)
 {
     hashmap *hshmp;
 
-    Hash_Ctor (hshmp, SIZE_INIT, Hash_Calc);
+    hshmp = Hash_Ctor (SIZE_INIT, Hash_Calc);
 
     Hash_Fill (FSTDIO, hshmp);
     Contest_Task (hshmp);
