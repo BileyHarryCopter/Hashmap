@@ -1,5 +1,27 @@
 #include "hashmap.h"
+//===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*//
+              //   Announcement the structer of hashmap    //
+//===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*//
+typedef struct node_t
+{
+    struct node_t *next;
+    data_t        data;
+} node_t;
 
+typedef struct bucket
+{
+    node_t        *top;
+} bucket;
+
+struct hashmap
+{
+    bucket        *array;
+    unsigned      capacity;
+    unsigned      insertion;
+    unsigned      (*hash_calc) (data_t data);
+};
+//===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*//
+//===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*//
 int Hash_Ctor (hashmap *hshmp, unsigned size_init, unsigned (*Hash_Calc)(data_t data))
 {
     int i = 0;
@@ -103,7 +125,7 @@ unsigned Hash_Find (hashmap hshmp, data_t data)
     return conv;
 }
 
-int Contest_Task (hashmap hshmp)
+int Contest_Task (hashmap *hshmp)
 {
     char symb;
     char *str;
@@ -119,7 +141,7 @@ int Contest_Task (hashmap hshmp)
         if (isalpha (symb))
         {
             str = strctor (symb);
-            printf ("%u ", Hash_Find (hshmp, str));
+            printf ("%u ", Hash_Find (*hshmp, str));
             position += strlen (str);
         }
     }
