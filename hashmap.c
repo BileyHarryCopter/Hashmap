@@ -193,9 +193,8 @@ int Hash_Resz (hashmap *hshmp)
             free (first);
             continue;
         }
-        second = first;
         first = first->next;
-        free (second);
+        free (hshmp->array[i].top);
         while (first->next != NULL)
         {
             Hash_Insrt (new_hshmp, first->data);
@@ -211,7 +210,7 @@ int Hash_Resz (hashmap *hshmp)
     hshmp->array     = new_hshmp->array;
     hshmp->capacity  = new_hshmp->capacity;
     hshmp->insertion = new_hshmp->insertion;
-    hshmp            = new_hshmp;
+    hshmp = new_hshmp;
 
     return NO_ERROR;
 }
