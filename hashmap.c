@@ -171,11 +171,12 @@ int Hash_Insrt (hashmap *hshmp, data_t insrt_data)
 
     assert (hshmp->array[hash_key].top);
 
+    /*
     if (hshmp->array[hash_key].top == NULL)
     {
         hshmp->array[hash_key].top->next = (node_t *) calloc (1, sizeof (node_t));
     }
-
+    */
     list->next = hshmp->array[hash_key].top->next;
     list->data = insrt_data;
     hshmp->array[hash_key].top->next = list;
