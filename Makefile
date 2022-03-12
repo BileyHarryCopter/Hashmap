@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-c
 
-all: hello clean
+all: hello
 
 hello: hashmap.o main.o
 	$(CC) hashmap.o main.o -o start
