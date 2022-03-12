@@ -193,7 +193,9 @@ int Hash_Resz (hashmap *hshmp)
             free (first);
             continue;
         }
+        second = first;
         first = first->next;
+        free (second);
         while (first->next != NULL)
         {
             Hash_Insrt (new_hshmp, first->data);
