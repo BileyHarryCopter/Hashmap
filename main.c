@@ -9,7 +9,8 @@ int main (void)
     Hash_Fill (FSTDIO, hshmp);
     Contest_Task (hshmp);
 
-    //Hash_Dump (hshmp);
+    //  Hash_Dump (hshmp);
+    
     Hash_Dtor (hshmp);
     return 0;
 }

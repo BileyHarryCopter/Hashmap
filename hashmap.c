@@ -246,18 +246,18 @@ int Hash_Dtor (hashmap *hshmp)
     return NO_ERROR;
 }
 
-void Hash_Dump (hashmap hshmp)
+void Hash_Dump (hashmap *hshmp)
 {
     int i = 0;
     node_t *list;
 
     printf ("_HASHMAP_\n");
-    printf ("\tCAPACITY:   %u\n", hshmp.capacity);
-    printf ("\tINSERTIONS: %u\n\n", hshmp.insertion);
-    for (i = 0; i < hshmp.capacity; i++)
+    printf ("\tCAPACITY:   %u\n", hshmp->capacity);
+    printf ("\tINSERTIONS: %u\n\n", hshmp->insertion);
+    for (i = 0; i < hshmp->capacity; i++)
     {
         printf ("bucket[%d]:\n\t", i);
-        list = hshmp.array[i].top;
+        list = hshmp->array[i].top;
         while (list)
         {
             printf ("%s -> ", list->data);

@@ -42,7 +42,7 @@ int Hash_Insrt (hashmap *hshmp, data_t insrt_data);
 int Contest_Task (hashmap *hshmp);
 
 
-void Hash_Dump (hashmap hshmp);
+void Hash_Dump (hashmap *hshmp);
 unsigned Hash_Calc (data_t data);
 
 char *strctor  (char first);

@@ -7,7 +7,7 @@
 
 2.  Secondly - enter to directory **Hashmap** with this repository and launch **hashmap** though the terminal with following command:
 
-        make -f Makefile
+        make
 
 3.  For launching write down in the terminal:
 
