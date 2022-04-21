@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -c
-DATA_FILE = ../009.dat
+DATA_FILE = Data.txt
 
 all: hello clean
 
