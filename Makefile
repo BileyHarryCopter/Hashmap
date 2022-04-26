@@ -1,10 +1,10 @@
 CC = gcc
 CFLAGS = -c
-DATA_FILE = Data.txt
+DATA_FILE = data.txt
 
-all: hello clean
+all: start clean
 
-hello: hashmap.o main.o
+start: hashmap.o main.o
 	$(CC) hashmap.o main.o -o start
 
 hashmap.o: hashmap.c
@@ -16,7 +16,7 @@ main.o: main.c
 clean:
 	rm -rf *.o hello
 
-check_leaks:
+leaks:
 	leaks -atExit -- ./start < $(DATA_FILE)
 
 run:
