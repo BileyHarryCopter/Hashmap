@@ -14,36 +14,38 @@
 enum
 {
     NO_ERROR    = 0,
-    INPUT_ERROR = 1,
-    FSTDIO      = 2,
-    FFILE       = 3,
-    SIZE_INIT   = 10,
+    ERROR,
+    INPUT_ERROR,
+    CONTEST,
+    FFILE,
+    SIZE_INIT   = 100,
     STRLEN      = 50
 };
 
 typedef char* data_t;
-struct node_t;
+typedef struct list_t list_t;
 typedef struct hashmap hashmap;
 
 //===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*//
 //===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*===*//
-hashmap *Hash_Ctor (const unsigned size_init, unsigned (*Hash_Calc)(data_t data));
-int Hash_Resz (hashmap *hshmp);
-int Hash_Dtor (hashmap *hshmp);
-unsigned Hash_Find (hashmap hshmp, data_t data);
+hashmap *HashCtor (const unsigned size_init, unsigned (*hashcalc)(data_t data));
+int HashResz (hashmap *hshmp);
+int HashDtor (hashmap *hshmp);
+unsigned HashFind (const hashmap *hshmp, data_t data);
 
-int Hash_Fill (int mode, ...);
+int HashFill (int mode, ...);
 
-int Hash_Insrt (hashmap *hshmp, data_t insrt_data);
+int HashInsrt (hashmap *hshmp, data_t insrt_data);
 
 
 // int Contest_Task (hashmap hshmp, const char* name);
-int Contest_Task (hashmap *hshmp);
+int ContestTask (hashmap *hshmp);
 
 
-void Hash_Dump (hashmap *hshmp);
-unsigned Hash_Calc (data_t data);
+void HashDump (hashmap *hshmp);
+unsigned HashCalc (data_t data);
 
+int strdel (char * str);
 char *strctor  (char first);
 char *fstrctor (char first, FILE * file);
 int istrcmp (const char * str1, const char * str2);
