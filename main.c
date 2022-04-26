@@ -1,4 +1,4 @@
-#include "hashmap.h"
+#include "src/hashmap.h"
 
 int main (int argv, char* argc[])
 {
