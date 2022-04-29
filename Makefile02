@@ -1,0 +1,29 @@
+CC = gcc
+CFLAGS ?= -O2 --std=c18
+SRCDIR = src
+DATA_FILE = data/data.txt
+
+all: start.o
+
+start.o: hashmap.o main.o
+	$(CC) hashmap.o main.o -s start.o
+
+hashmap.o: $(SRCDIR)/hashmap.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+main.o: main.c
+	$(CC) $(CFLAGS) -c $< -o $@ 
+
+
+
+.PHONY: clean
+clean:
+	rm -rf *.o hello
+
+.PHONY: leaks
+leaks:
+	leaks -atExit -- ./start < $(DATA_FILE)
+
+.PHONY: run
+run:
+	./start < $(DATA_FILE)

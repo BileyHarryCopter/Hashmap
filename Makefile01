@@ -1,5 +1,6 @@
 CC = gcc
-CFLAGS = -c
+CFLAGS = -O2
+SRCDIR = src
 DATA_FILE = data/data.txt
 
 all: start clean
@@ -7,17 +8,19 @@ all: start clean
 start: hashmap.o main.o
 	$(CC) hashmap.o main.o -o start
 
-hashmap.o:
-	$(CC) $(CFLAGS) src/hashmap.c -o hashmap.o
+hashmap.o: $(SRCDIR)/hashmap.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-main.o:
-	$(CC) $(CFLAGS) main.c -o main.o
+main.o: main.c
+	$(CC) $(CFLAGS) -c $< -o $@ 
 
+.PHONY: clean
 clean:
 	rm -rf *.o hello
 
+.PHONY: leaks
 leaks:
 	leaks -atExit -- ./start < $(DATA_FILE)
-
+.PHONY: run
 run:
 	./start < $(DATA_FILE)
