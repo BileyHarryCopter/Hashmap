@@ -13,11 +13,13 @@ CPPFLAGS += $(INCLUDE)
 OBJS = $(SRC:.c=.o)
 # dependencies files
 DEPS = $(SRC:.c=.d)
+# build folder
+
 
 .PHONY: all
-all: 
+all:
 	@echo "Compiling..."
-	@$(CPP) $(CPPFLAGS) $(SRC) -o start
+	$(CPP) $(CPPFLAGS) $(SRC) -o start
 
 .PHONY: clean
 clean:
