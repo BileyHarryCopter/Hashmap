@@ -117,24 +117,61 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named librar
+# Target rules for targets named hash
 
 # Build rule for target.
-librar: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 librar
-.PHONY : librar
+hash: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 hash
+.PHONY : hash
 
 # fast build rule for target.
-librar/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/librar.dir/build.make CMakeFiles/librar.dir/build
-.PHONY : librar/fast
+hash/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hash.dir/build.make CMakeFiles/hash.dir/build
+.PHONY : hash/fast
+
+#=============================================================================
+# Target rules for targets named start
+
+# Build rule for target.
+start: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 start
+.PHONY : start
+
+# fast build rule for target.
+start/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/start.dir/build.make CMakeFiles/start.dir/build
+.PHONY : start/fast
+
+main.o: main.c.o
+.PHONY : main.o
+
+# target to build an object file
+main.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/start.dir/build.make CMakeFiles/start.dir/main.c.o
+.PHONY : main.c.o
+
+main.i: main.c.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/start.dir/build.make CMakeFiles/start.dir/main.c.i
+.PHONY : main.c.i
+
+main.s: main.c.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/start.dir/build.make CMakeFiles/start.dir/main.c.s
+.PHONY : main.c.s
 
 src/hashmap.o: src/hashmap.c.o
 .PHONY : src/hashmap.o
 
 # target to build an object file
 src/hashmap.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/librar.dir/build.make CMakeFiles/librar.dir/src/hashmap.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hash.dir/build.make CMakeFiles/hash.dir/src/hashmap.c.o
 .PHONY : src/hashmap.c.o
 
 src/hashmap.i: src/hashmap.c.i
@@ -142,7 +179,7 @@ src/hashmap.i: src/hashmap.c.i
 
 # target to preprocess a source file
 src/hashmap.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/librar.dir/build.make CMakeFiles/librar.dir/src/hashmap.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hash.dir/build.make CMakeFiles/hash.dir/src/hashmap.c.i
 .PHONY : src/hashmap.c.i
 
 src/hashmap.s: src/hashmap.c.s
@@ -150,7 +187,7 @@ src/hashmap.s: src/hashmap.c.s
 
 # target to generate assembly for a file
 src/hashmap.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/librar.dir/build.make CMakeFiles/librar.dir/src/hashmap.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hash.dir/build.make CMakeFiles/hash.dir/src/hashmap.c.s
 .PHONY : src/hashmap.c.s
 
 # Help Target
@@ -161,7 +198,11 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... librar"
+	@echo "... hash"
+	@echo "... start"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 	@echo "... src/hashmap.o"
 	@echo "... src/hashmap.i"
 	@echo "... src/hashmap.s"

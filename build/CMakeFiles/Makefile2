@@ -63,7 +63,8 @@ CMAKE_BINARY_DIR = /Users/gerasimenkodanilvladimirovic/Documents/Dedos/Hashmap/b
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/librar.dir/all
+all: CMakeFiles/hash.dir/all
+all: CMakeFiles/start.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -71,34 +72,61 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/librar.dir/clean
+clean: CMakeFiles/hash.dir/clean
+clean: CMakeFiles/start.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/librar.dir
+# Target rules for target CMakeFiles/hash.dir
 
 # All Build rule for target.
-CMakeFiles/librar.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/librar.dir/build.make CMakeFiles/librar.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/librar.dir/build.make CMakeFiles/librar.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/gerasimenkodanilvladimirovic/Documents/Dedos/Hashmap/build/CMakeFiles --progress-num=1,2 "Built target librar"
-.PHONY : CMakeFiles/librar.dir/all
+CMakeFiles/hash.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hash.dir/build.make CMakeFiles/hash.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hash.dir/build.make CMakeFiles/hash.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/gerasimenkodanilvladimirovic/Documents/Dedos/Hashmap/build/CMakeFiles --progress-num=1,2 "Built target hash"
+.PHONY : CMakeFiles/hash.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/librar.dir/rule: cmake_check_build_system
+CMakeFiles/hash.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/gerasimenkodanilvladimirovic/Documents/Dedos/Hashmap/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/librar.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/hash.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/gerasimenkodanilvladimirovic/Documents/Dedos/Hashmap/build/CMakeFiles 0
-.PHONY : CMakeFiles/librar.dir/rule
+.PHONY : CMakeFiles/hash.dir/rule
 
 # Convenience name for target.
-librar: CMakeFiles/librar.dir/rule
-.PHONY : librar
+hash: CMakeFiles/hash.dir/rule
+.PHONY : hash
 
 # clean rule for target.
-CMakeFiles/librar.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/librar.dir/build.make CMakeFiles/librar.dir/clean
-.PHONY : CMakeFiles/librar.dir/clean
+CMakeFiles/hash.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hash.dir/build.make CMakeFiles/hash.dir/clean
+.PHONY : CMakeFiles/hash.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/start.dir
+
+# All Build rule for target.
+CMakeFiles/start.dir/all: CMakeFiles/hash.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/start.dir/build.make CMakeFiles/start.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/start.dir/build.make CMakeFiles/start.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/gerasimenkodanilvladimirovic/Documents/Dedos/Hashmap/build/CMakeFiles --progress-num=3,4 "Built target start"
+.PHONY : CMakeFiles/start.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/start.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/gerasimenkodanilvladimirovic/Documents/Dedos/Hashmap/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/start.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/gerasimenkodanilvladimirovic/Documents/Dedos/Hashmap/build/CMakeFiles 0
+.PHONY : CMakeFiles/start.dir/rule
+
+# Convenience name for target.
+start: CMakeFiles/start.dir/rule
+.PHONY : start
+
+# clean rule for target.
+CMakeFiles/start.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/start.dir/build.make CMakeFiles/start.dir/clean
+.PHONY : CMakeFiles/start.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

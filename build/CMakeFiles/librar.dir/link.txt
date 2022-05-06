@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc liblibrar.a CMakeFiles/librar.dir/src/hashmap.c.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib liblibrar.a
