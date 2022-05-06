@@ -11,7 +11,7 @@
 
 3.  For launching write down in the terminal:
 
-        ./start
+        make run
 
 3.  You also can launch the program with your test-text. Change text in the file **Data.txt** on your own by following pattern:
 
